@@ -4,6 +4,9 @@ fn main() {
 
     let ans2 = fib(4);
     println!("{}", ans2);
+
+    let name = String::from("Anish Kumar");
+    println!("{}", get_str_len(name));
 }
 
 fn is_even(x: i64) -> bool {
@@ -39,4 +42,8 @@ fn fib(num: u32) -> u32 {
         first = temp
     }
     return second;
+}
+
+fn get_str_len(str: String) -> usize{
+    str.chars().count()
 }
