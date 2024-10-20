@@ -74,12 +74,14 @@ fn main() {
     print_direction(my_direction);
 
     let my_circle = Shape::Circle(3.14);
+    calculate_area(my_circle);
     let my_square = Shape::Square(3.14);
+    calculate_area(my_square);
     let my_rectangle = Shape::Rectangle(3.14, 3.14);
+    calculate_area(my_rectangle);
     // println!("{}", my_circle); //`Shape` does not implement `Display`
     // println!("{}", my_square); //`Shape` does not implement `Display`
     // println!("{}", my_rectangle); //`Shape` does not implement `Display`
-
 
 }
 
@@ -124,5 +126,16 @@ fn get_str_len(str: String) -> usize {
 
 fn print_direction(my_direction: Direction) {
     println!("{:?}", my_direction);
+}
+
+//Pattern matching
+fn calculate_area(shape: Shape) -> f64 {
+    let area = match shape {
+        Shape::Circle(a) => a * a,
+        Shape::Rectangle(a, b) => a * b,
+        _ => 0.0
+    };
+
+    return area;
 }
 
