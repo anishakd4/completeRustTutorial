@@ -6,7 +6,6 @@ struct User {
     sign_in_count: u64,
 }
 
-
 struct Rect {
     width: u32,
     height: u32,
@@ -25,6 +24,23 @@ impl Rect {
         7
     }
 }
+
+//enums take less space than strings. Also they are type safe, compile time safe.
+#[derive(Debug)]
+enum Direction {
+    North,
+    South,
+    East,
+    West,
+}
+
+//enum with associated data
+enum Shape {
+    Circle(f64),
+    Square(f64),
+    Rectangle(f64, f64),
+}
+
 
 fn main() {
     let ans = is_even(34545);
@@ -52,6 +68,19 @@ fn main() {
     println!("{}", rect.area());
     println!("{}", rect.perimeter(5));
     println!("{}", Rect::debug());
+
+    //enums let you enumerate over various types of a value. Like if something has some certain amount of types
+    let my_direction = Direction::East;
+    print_direction(my_direction);
+
+    let my_circle = Shape::Circle(3.14);
+    let my_square = Shape::Square(3.14);
+    let my_rectangle = Shape::Rectangle(3.14, 3.14);
+    // println!("{}", my_circle); //`Shape` does not implement `Display`
+    // println!("{}", my_square); //`Shape` does not implement `Display`
+    // println!("{}", my_rectangle); //`Shape` does not implement `Display`
+
+
 }
 
 fn is_even(x: i64) -> bool {
@@ -91,5 +120,9 @@ fn fib(num: u32) -> u32 {
 
 fn get_str_len(str: String) -> usize {
     str.chars().count()
+}
+
+fn print_direction(my_direction: Direction) {
+    println!("{:?}", my_direction);
 }
 
