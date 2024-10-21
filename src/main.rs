@@ -44,14 +44,9 @@ enum Shape {
 }
 
 fn main() {
-    let ans = is_even(34545);
-    println!("{}", ans);
 
-    let ans2 = fib(4);
-    println!("{}", ans2);
-
-    let name = String::from("Anish Kumar");
-    println!("{}", get_str_len(name));
+    //variables loops and function
+    variables_loop_function();
 
     //structs
     structs_demo();
@@ -67,6 +62,17 @@ fn main() {
 
     //the Result enum lets you either return Ok value or Err value. The Result enum is how you do Error handling in Rust.
     result_enum_demo();
+}
+
+fn variables_loop_function() {
+    let ans = is_even(34545);
+    println!("{}", ans);
+
+    let ans2 = fib(4);
+    println!("{}", ans2);
+
+    let name = String::from("Anish Kumar");
+    println!("{}", get_str_len(name));
 }
 
 fn is_even(x: i64) -> bool {
