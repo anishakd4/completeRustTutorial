@@ -1,3 +1,5 @@
+use std::fs::read_to_string;
+
 #[derive(Debug)] // use this to print whole struct
 struct User {
     active: bool,
@@ -41,7 +43,6 @@ enum Shape {
     Rectangle(f64, f64),
 }
 
-
 fn main() {
     let ans = is_even(34545);
     println!("{}", ans);
@@ -52,37 +53,20 @@ fn main() {
     let name = String::from("Anish Kumar");
     println!("{}", get_str_len(name));
 
-    let user1 = User {
-        active: true,
-        username: String::from("anishkumar3232"),
-        email: String::from("aads@gmail.com"),
-        sign_in_count: 1,
-    };
-    println!("{:?}", user1); //println macro doesn't know on its own how to print a struct
+    //structs
+    structs_demo();
 
     //Attaching function to the struct
-    let rect = Rect {
-        width: 30,
-        height: 50,
-    }; //this rect will automatically get access to the area function
-    println!("{}", rect.area());
-    println!("{}", rect.perimeter(5));
-    println!("{}", Rect::debug());
+    attach_function_to_struct();
 
     //enums let you enumerate over various types of a value. Like if something has some certain amount of types
-    let my_direction = Direction::East;
-    print_direction(my_direction);
+    enums_demo();
 
-    let my_circle = Shape::Circle(3.14);
-    calculate_area(my_circle);
-    let my_square = Shape::Square(3.14);
-    calculate_area(my_square);
-    let my_rectangle = Shape::Rectangle(3.14, 3.14);
-    calculate_area(my_rectangle);
-    // println!("{}", my_circle); //`Shape` does not implement `Display`
-    // println!("{}", my_square); //`Shape` does not implement `Display`
-    // println!("{}", my_rectangle); //`Shape` does not implement `Display`
+    //options enum. It lets you return null/none/nil from a function.
+    options_enum_demo();
 
+    //the Result enum lets you either return Ok value or Err value. The Result enum is how you do Error handling in Rust.
+    result_enum_demo();
 }
 
 fn is_even(x: i64) -> bool {
@@ -137,5 +121,72 @@ fn calculate_area(shape: Shape) -> f64 {
     };
 
     return area;
+}
+
+fn find_first_a(s: String) -> Option<i32> {
+    for (index, c) in s.chars().enumerate() {
+        if c == 'a' {
+            return Some(index as i32);
+        }
+    }
+
+    return None;
+}
+
+fn structs_demo() {
+    let user1 = User {
+        active: true,
+        username: String::from("anishkumar3232"),
+        email: String::from("aads@gmail.com"),
+        sign_in_count: 1,
+    };
+    println!("{:?}", user1); //println macro doesn't know on its own how to print a struct
+}
+
+fn attach_function_to_struct() {
+    let rect = Rect {
+        width: 30,
+        height: 50,
+    }; //this rect will automatically get access to the area function
+    println!("{}", rect.area());
+    println!("{}", rect.perimeter(5));
+    println!("{}", Rect::debug());
+}
+
+fn enums_demo() {
+    let my_direction = Direction::East;
+    print_direction(my_direction);
+
+    let my_circle = Shape::Circle(3.14);
+    calculate_area(my_circle);
+    let my_square = Shape::Square(3.14);
+    calculate_area(my_square);
+    let my_rectangle = Shape::Rectangle(3.14, 3.14);
+    calculate_area(my_rectangle);
+    // println!("{}", my_circle); //`Shape` does not implement `Display`
+    // println!("{}", my_square); //`Shape` does not implement `Display`
+    // println!("{}", my_rectangle); //`Shape` does not implement `Display`
+}
+
+fn options_enum_demo() {
+    let ind = find_first_a(String::from("pritam"));
+    match ind {
+        Some(x) => println!("first a at : {}", x),
+        None => println!("a not found"),
+    }
+    let ind = find_first_a(String::from("ulllullu"));
+    match ind {
+        Some(x) => println!("first a at : {}", x),
+        None => println!("a not found"),
+    }
+}
+
+fn result_enum_demo() {
+    let result = read_to_string("a.txt");
+
+    match result {
+        Ok(data) => println!("{}", data),
+        Err(err) => println!("error: {}", err),
+    }
 }
 
