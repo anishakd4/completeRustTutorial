@@ -62,6 +62,9 @@ fn main() {
 
     //the Result enum lets you either return Ok value or Err value. The Result enum is how you do Error handling in Rust.
     result_enum_demo();
+
+    //Adding new crate to the package
+    print_current_time()
 }
 
 fn variables_loop_function() {
@@ -194,5 +197,10 @@ fn result_enum_demo() {
         Ok(data) => println!("{}", data),
         Err(err) => println!("error: {}", err),
     }
+}
+use chrono::Local;
+fn print_current_time() {
+    let now = Local::now();
+    println!("current time is: {}", now);
 }
 
