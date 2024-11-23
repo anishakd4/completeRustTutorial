@@ -18,3 +18,5 @@
 ## Memory allocation
 
 ![memory_allocation](./memory_allocation.png)
+
+![memory_mangement](./memory_mangement.png)
