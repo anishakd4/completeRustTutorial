@@ -1,21 +1,5 @@
 use std::fs::read_to_string;
 
-//enums take less space than strings. Also they are type safe, compile time safe.
-#[derive(Debug)]
-enum Direction {
-    North,
-    South,
-    East,
-    West,
-}
-
-//enum with associated data
-enum Shape {
-    Circle(f64),
-    Square(f64),
-    Rectangle(f64, f64),
-}
-
 fn main() {
 
     //variables loops and function
@@ -90,7 +74,6 @@ fn get_str_len(str: String) -> usize {
     str.chars().count() //implicit return from the function
 }
 
-
 #[derive(Debug)] // use this to print whole struct. We can't simple print the whole struct, we need to apply debug trait.
 struct User {
     active: bool,
@@ -138,29 +121,20 @@ fn attach_function_to_struct() {
     println!("{}", Rect::debug());
 }
 
-fn print_direction(my_direction: Direction) {
-    println!("{:?}", my_direction);
+//enums take less space than strings. Also they are type safe, compile time safe.
+#[derive(Debug)]
+enum Direction {
+    North,
+    South,
+    East,
+    West,
 }
 
-//Pattern matching
-fn calculate_area(shape: Shape) -> f64 {
-    let area = match shape {
-        Shape::Circle(a) => a * a,
-        Shape::Rectangle(a, b) => a * b,
-        _ => 0.0
-    };
-
-    return area;
-}
-
-fn find_first_a(s: String) -> Option<i32> {
-    for (index, c) in s.chars().enumerate() {
-        if c == 'a' {
-            return Some(index as i32);
-        }
-    }
-
-    return None;
+//enum with associated data
+enum Shape {
+    Circle(f64),
+    Square(f64),
+    Rectangle(f64, f64),
 }
 
 fn enums_demo() {
@@ -178,6 +152,21 @@ fn enums_demo() {
     // println!("{}", my_rectangle); //`Shape` does not implement `Display`
 }
 
+fn print_direction(my_direction: Direction) {
+    println!("{:?}", my_direction);
+}
+
+//Pattern matching
+fn calculate_area(shape: Shape) -> f64 {
+    let area = match shape {
+        Shape::Circle(a) => a * a,
+        Shape::Rectangle(a, b) => a * b,
+        _ => 0.0
+    };
+
+    return area;
+}
+
 fn options_enum_demo() {
     let ind = find_first_a(String::from("pritam"));
     match ind {
@@ -189,6 +178,16 @@ fn options_enum_demo() {
         Some(x) => println!("first a at : {}", x),
         None => println!("a not found"),
     }
+}
+
+fn find_first_a(s: String) -> Option<i32> {
+    for (index, c) in s.chars().enumerate() {
+        if c == 'a' {
+            return Some(index as i32);
+        }
+    }
+
+    return None;
 }
 
 fn result_enum_demo() {
