@@ -8,6 +8,9 @@
 
 ## println is a macro. It is not a function.
 
+## Enums
+- There are some enums Rust provides you by default specifically the Option and the Result enum
+
 ## Package mangement
 
 - in Rust external library is called crate. So to add a new crate to the project enter `cargo add chrono` to the terminal.

@@ -170,6 +170,7 @@ fn calculate_area(shape: Shape) -> f64 {
     return area;
 }
 
+//The option enum lets you return some value or none value
 fn options_enum_demo() {
     let ind = find_first_a(String::from("pritam"));
     match ind {
