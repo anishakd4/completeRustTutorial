@@ -121,6 +121,7 @@ fn attach_function_to_struct() {
     println!("{}", Rect::debug());
 }
 
+//enums let you enumerate over various types of a value
 //enums take less space than strings. Also they are type safe, compile time safe.
 #[derive(Debug)]
 enum Direction {
@@ -132,7 +133,7 @@ enum Direction {
 
 //enum with associated data
 enum Shape {
-    Circle(f64),
+    Circle(f64), //variant with with associated data
     Square(f64),
     Rectangle(f64, f64),
 }
@@ -163,6 +164,8 @@ fn calculate_area(shape: Shape) -> f64 {
         Shape::Rectangle(a, b) => a * b,
         _ => 0.0
     };
+
+    println!("area: {}", area);
 
     return area;
 }
