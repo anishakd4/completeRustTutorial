@@ -1,4 +1,5 @@
 use std::fs::read_to_string;
+use chrono::Local;
 
 fn main() {
 
@@ -194,6 +195,7 @@ fn find_first_a(s: String) -> Option<i32> {
     return None;
 }
 
+//The Result enum lets you return either ok value or Err value. The result enum is how you can do error handling in Rust
 fn result_enum_demo() {
     let result = read_to_string("a.txt");
 
@@ -202,7 +204,7 @@ fn result_enum_demo() {
         Err(err) => println!("error: {}", err),
     }
 }
-use chrono::Local;
+
 fn print_current_time() {
     let now = Local::now();
     println!("current time is: {}", now);
