@@ -15,3 +15,6 @@
 
 - in Rust external library is called crate. So to add a new crate to the project enter `cargo add chrono` to the terminal.
 
+## Memory allocation
+
+![memory_allocation](./memory_allocation.png)
