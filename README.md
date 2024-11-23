@@ -20,3 +20,7 @@
 ![memory_allocation](./memory_allocation.png)
 
 ![memory_mangement](./memory_mangement.png)
+
+![memory_mangement2](./memory_mangement2.png)
+
+![memory_mangement3](./memory_mangement3.png)
