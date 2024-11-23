@@ -1,10 +1,12 @@
 # completeRustTutorial
 
 ## Two ways to create a rust project
-- one is end user application
-- second is library
+- one is end user application. command is `cargo init`
+- second is library `cargo init --lib`
 
 ![rust_project_create](./rust_project_create.png)
+
+## println is a macro. It is not a function.
 
 ## Package mangement
 

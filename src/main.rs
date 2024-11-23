@@ -80,7 +80,7 @@ fn variables_loop_function() {
 
 fn is_even(x: i64) -> bool {
     if x % 2 == 0 {
-        return true;
+        true
     } else {
         return false;
     }
@@ -114,7 +114,7 @@ fn fib(num: u32) -> u32 {
 }
 
 fn get_str_len(str: String) -> usize {
-    str.chars().count()
+    str.chars().count() //implicit return from the function
 }
 
 fn print_direction(my_direction: Direction) {
