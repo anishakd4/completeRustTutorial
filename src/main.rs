@@ -119,7 +119,7 @@ impl Rect {
         self.width * self.height
     }
 
-    fn perimeter(&self, num: u32) -> u32 { //addition parameters can passed
+    fn perimeter(&self, num: u32) -> u32 { //additional parameters can be passed
         (2 * (self.height + self.width)) + num
     }
 
