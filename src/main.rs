@@ -197,7 +197,7 @@ fn find_first_a(s: String) -> Option<i32> {
 
 //The Result enum lets you return either ok value or Err value. The result enum is how you can do error handling in Rust
 fn result_enum_demo() {
-    let result = read_to_string("a.txt");
+    let result = read_to_string("a.txt"); //read_to_string comes from the Rust standard library
 
     match result {
         Ok(data) => println!("{}", data),
