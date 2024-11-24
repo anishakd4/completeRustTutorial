@@ -22,7 +22,11 @@ fn main() {
     result_enum_demo();
 
     //Adding new crate to the package
-    print_current_time()
+    print_current_time();
+
+    //Moving demo
+    moving_demo();
+    moving_demo2();
 }
 
 fn variables_loop_function() {
@@ -210,3 +214,19 @@ fn print_current_time() {
     println!("current time is: {}", now);
 }
 
+fn moving_demo(){
+    let s1 = String::from("hello");
+    let s2 = s1;
+    println!("{}", s2);
+    //println!("{}", s1); //error as s2 is the current owner. Value used after being moved
+}
+
+fn moving_demo2(){
+    let s1 = String::from("hello");
+    moving_demo3_print_str(s1);
+    //println!("{}", s1); //error as s2 is the current owner. Value used after being moved
+}
+
+fn moving_demo3_print_str(s3: String){
+    println!("{}", s3);
+}
