@@ -35,3 +35,6 @@
 - When the owner goes out of scope, the value will be dropped.
 
 ![ownership](./ownership.png)
+
+## Rules of reference
+- At a given time you can have either one mutable reference or any number of immutable references.

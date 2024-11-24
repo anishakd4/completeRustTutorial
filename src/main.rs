@@ -1,8 +1,7 @@
-use std::fs::read_to_string;
 use chrono::Local;
+use std::fs::read_to_string;
 
 fn main() {
-
     //variables loops and function
     variables_loop_function();
 
@@ -27,6 +26,12 @@ fn main() {
     //Moving demo
     moving_demo();
     moving_demo2();
+
+    //Reference rule demo
+    reference_rule_demo();
+
+    //vector_demo
+    vector_demo();
 }
 
 fn variables_loop_function() {
@@ -103,15 +108,18 @@ struct Rect {
 }
 
 impl Rect {
-    fn area(&self) -> u32 { // here self is the current struct
+    fn area(&self) -> u32 {
+        // here self is the current struct
         self.width * self.height
     }
 
-    fn perimeter(&self, num: u32) -> u32 { //additional parameters can be passed
+    fn perimeter(&self, num: u32) -> u32 {
+        //additional parameters can be passed
         (2 * (self.height + self.width)) + num
     }
 
-    fn debug() -> u32 { // this is like a static function in java class
+    fn debug() -> u32 {
+        // this is like a static function in java class
         7
     }
 }
@@ -167,7 +175,7 @@ fn calculate_area(shape: Shape) -> f64 {
     let area = match shape {
         Shape::Circle(a) => a * a,
         Shape::Rectangle(a, b) => a * b,
-        _ => 0.0
+        _ => 0.0,
     };
 
     println!("area: {}", area);
@@ -214,19 +222,39 @@ fn print_current_time() {
     println!("current time is: {}", now);
 }
 
-fn moving_demo(){
+fn moving_demo() {
     let s1 = String::from("hello");
     let s2 = s1;
     println!("{}", s2);
     //println!("{}", s1); //error as s2 is the current owner. Value used after being moved
 }
 
-fn moving_demo2(){
+fn moving_demo2() {
     let s1 = String::from("hello");
     moving_demo3_print_str(s1); //this is similar to doing let s3 = s1
-    //println!("{}", s1); //error as s2 is the current owner. Value used after being moved
+                                //println!("{}", s1); //error as s2 is the current owner. Value used after being moved
 }
 
-fn moving_demo3_print_str(s3: String){
+fn moving_demo3_print_str(s3: String) {
     println!("{}", s3);
+}
+
+fn reference_rule_demo() {
+    let mut s1 = String::from("hello");
+    let mut s2 = &mut s1;
+    reference_rule_demo_print_str(&mut s1);
+    //println!("{} {}", s1, s2); //cannot borrow `s1` as mutable more than once at a time
+}
+
+fn reference_rule_demo_print_str(s1: &mut String) {
+    println!("{}", s1);
+}
+
+//vectors allow you to store more than 1 value in a single data structure that puts all values next to each other in memory
+fn vector_demo() {
+    let mut vec = Vec::new();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    println!("{:?}", vec);
 }
