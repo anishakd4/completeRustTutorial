@@ -264,7 +264,17 @@ fn vector_demo() {
     vec2.push(1);
     vec2.push(2);
     vec2.push(3);
-    println!("even_filter {:?}", even_filter2(&vec2));
+    println!("even_filter2 {:?}", even_filter2(&vec2));
+
+
+    let mut vec3 = Vec::new();
+    vec3.push(1);
+    vec3.push(2);
+    vec3.push(3);
+    println!("even_filter3 {:?}", even_filter3(&mut vec2));
+
+    let numbers = vec![1, 2, 3, 4, 5]; //vector initialize using a macro
+    println!("numbers {:?}", numbers);
 }
 
 fn even_filter(vec: Vec<i32>) -> Vec<i32> {
@@ -285,4 +295,16 @@ fn even_filter2(vec: &Vec<i32>) -> Vec<i32> {
         }
     }
     return new_vec;
+}
+
+fn even_filter3(vec: &mut Vec<i32>){
+    let mut new_vec: Vec<i32> = Vec::new();
+    let mut i = 0;
+    while i < vec.len() {
+        if vec[i] % 2 != 0 {
+            new_vec.remove(i);
+        }else{
+            i += 1;
+        }
+    }
 }
