@@ -251,10 +251,38 @@ fn reference_rule_demo_print_str(s1: &mut String) {
 }
 
 //vectors allow you to store more than 1 value in a single data structure that puts all values next to each other in memory
+// as we can add elements in it and remove from it, it is stored in heap and a variable in stack is there pointing it on heap.
 fn vector_demo() {
     let mut vec = Vec::new();
     vec.push(1);
     vec.push(2);
     vec.push(3);
-    println!("{:?}", vec);
+    println!("vec {:?}", vec); //vector is struct and it implements debug trait thats why we are able to print whole vector using ?:
+    println!("even_filter {:?}", even_filter(vec));
+
+    let mut vec2 = Vec::new();
+    vec2.push(1);
+    vec2.push(2);
+    vec2.push(3);
+    println!("even_filter {:?}", even_filter2(&vec2));
+}
+
+fn even_filter(vec: Vec<i32>) -> Vec<i32> {
+    let mut new_vec: Vec<i32> = Vec::new();
+    for v in vec {
+        if v % 2 == 0 {
+            new_vec.push(v);
+        }
+    }
+    return new_vec;
+}
+
+fn even_filter2(vec: &Vec<i32>) -> Vec<i32> {
+    let mut new_vec: Vec<i32> = Vec::new();
+    for v in vec {
+        if v % 2 == 0 {
+            new_vec.push(*v);
+        }
+    }
+    return new_vec;
 }
