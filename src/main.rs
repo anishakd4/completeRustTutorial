@@ -223,7 +223,7 @@ fn moving_demo(){
 
 fn moving_demo2(){
     let s1 = String::from("hello");
-    moving_demo3_print_str(s1);
+    moving_demo3_print_str(s1); //this is similar to doing let s3 = s1
     //println!("{}", s1); //error as s2 is the current owner. Value used after being moved
 }
 
