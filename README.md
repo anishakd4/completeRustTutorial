@@ -1,6 +1,7 @@
 # completeRustTutorial
 
 ## Two ways to create a rust project
+
 - one is end user application. command is `cargo init`
 - second is library `cargo init --lib`
 
@@ -9,11 +10,13 @@
 ## println is a macro. It is not a function.
 
 ## Enums
+
 - There are some enums Rust provides you by default specifically the Option and the Result enum
 
 ## Package mangement
 
-- in Rust external library is called crate. So to add a new crate to the project enter `cargo add chrono` to the terminal.
+- in Rust external library is called crate. So to add a new crate to the project enter `cargo add chrono` to the
+  terminal.
 
 ## Memory allocation
 
@@ -24,3 +27,11 @@
 ![memory_mangement2](./memory_mangement2.png)
 
 ![memory_mangement3](./memory_mangement3.png)
+
+## Ownership rules
+
+- Each value in Rust has a owner
+- There can be only one owner at a time
+- When the owner goes out of scope, the value will be dropped.
+
+![ownership](./ownership.png)
