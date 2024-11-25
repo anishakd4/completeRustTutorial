@@ -117,6 +117,11 @@ fn main() {
     println!("lifetime demo");
     lifetime_demo();
 
+    //struct with lifetime
+    println!("");
+    println!("struct with lifetime demo");
+    struct_with_lifetime_demo();
+
 }
 
 fn variables_loop_function() {
@@ -702,4 +707,18 @@ fn longest<'a>(str1: &'a str, str2: &'a str) -> &'a str {
     }else{
         str2
     }
+}
+
+#[derive(Debug)]
+struct Userlifetime<'a> {
+    name: &'a str, //^ expected named lifetime parameter
+}
+
+fn struct_with_lifetime_demo(){
+    let name = String::from("Ansdfdsf");
+    let user = Userlifetime{
+        name: &name,
+    };
+
+    println!("{:?}", user);
 }
