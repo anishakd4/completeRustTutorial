@@ -46,3 +46,10 @@
 the for syntax when directly applied on the collection uses into_iter under the hood.
 
 ![for_loop_iter](./for_loop_iter.png)
+
+## consuming adapters
+- Methods that call next are called consuming adaptors, because calling them uses up the iterator.
+
+## Iterator adapters
+- Iterator adapters are methods defined on the iterator trait that don't consume the iterator, Instead they produce 
+different iterators by changing some aspect of the original iterator.

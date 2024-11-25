@@ -59,6 +59,16 @@ fn main() {
     println!("");
     println!("into iterator demo");
     into_iterator_demo();
+
+    //consuming adaptors
+    println!("");
+    println!("consuming adapters demo");
+    consuming_adaptors_demo();
+
+    //iterator adaptors
+    println!("");
+    println!("iterator adapters demo");
+    iterator_adaptors_demo();
 }
 
 fn variables_loop_function() {
@@ -406,4 +416,28 @@ fn into_iterator_demo() {
     }
 
     //println!("{:?}", v1); //ownership gets transferred in case of into_iter
+}
+
+fn consuming_adaptors_demo() {
+    let v1 = vec![1, 2, 3];
+    let v1_iter = v1.iter();
+
+    let total: i32 = v1_iter.sum();
+    println!("total is {}", total);
+
+    //Value used after being moved [E0382]. ownership got moved to sum function
+    // for val in v1_iter {
+    //
+    // }
+}
+
+fn iterator_adaptors_demo(){
+    let v1 = vec![1, 2, 3];
+    let v1_iter = v1.iter();
+
+    let v1_iter2 = v1_iter.map(|x| x + 1);
+
+    for val in v1_iter2 {
+        println!("val is {}", val);
+    }
 }
