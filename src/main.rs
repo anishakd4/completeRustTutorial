@@ -432,12 +432,22 @@ fn consuming_adaptors_demo() {
 }
 
 fn iterator_adaptors_demo(){
-    let v1 = vec![1, 2, 3];
+    let v1 = vec![1, 2, 3, 4];
     let v1_iter = v1.iter();
 
     let v1_iter2 = v1_iter.map(|x| x + 1);
 
     for val in v1_iter2 {
+        println!("val is {}", val);
+    }
+
+
+    let v2 = vec![1, 2, 3, 4];
+    let v2_iter = v2.iter();
+
+    let v2_iter2 = v2_iter.filter(|x| *x % 2 == 0);
+
+    for val in v2_iter2 {
         println!("val is {}", val);
     }
 }
