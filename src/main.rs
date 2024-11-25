@@ -69,6 +69,11 @@ fn main() {
     println!("");
     println!("iterator adapters demo");
     iterator_adaptors_demo();
+
+    //iterator in hashmaps
+    println!("");
+    println!("iterator in hashmap demo");
+    hashmap_iterator_demo();
 }
 
 fn variables_loop_function() {
@@ -449,5 +454,30 @@ fn iterator_adaptors_demo(){
 
     for val in v2_iter2 {
         println!("val is {}", val);
+    }
+
+
+    let v3 = vec![1, 2, 3, 4, 5];
+    let v3_iter = v3.iter();
+
+    let v3_iter2 = v3_iter.filter(|x| *x % 2 == 1).map(|x| x * 2);
+
+    let v3_new : Vec<i32> = v3_iter2.collect();
+    println!("v3: {:?}", v3_new);
+}
+
+fn hashmap_iterator_demo(){
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+    scores.insert(String::from("Green"), 30);
+
+    for (key, value) in scores.iter() {
+        println!("{} is scores {}", key, value);
+    }
+
+    for (key, value) in scores.iter_mut() {
+        *value += 10;
+        println!("{} is scores {}", key, value);
     }
 }
