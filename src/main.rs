@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use chrono::Local;
 use std::fs::read_to_string;
 
@@ -32,6 +33,32 @@ fn main() {
 
     //vector_demo
     vector_demo();
+
+    //hashmap_demo
+    hashmap_demo();
+
+    //tuples
+    tuples_demo();
+
+    //iterator demo
+    println!("");
+    println!("iterator demo");
+    iterator_demo();
+
+    //mutable iterator demo
+    println!("");
+    println!("mutable iterator demo");
+    mutable_iterator_demo();
+
+    //iterator demo using next
+    println!("");
+    println!("iterator demo using next");
+    iterator_demo_using_next();
+
+    //Into iterator demo
+    println!("");
+    println!("into iterator demo");
+    into_iterator_demo();
 }
 
 fn variables_loop_function() {
@@ -271,7 +298,7 @@ fn vector_demo() {
     vec3.push(1);
     vec3.push(2);
     vec3.push(3);
-    println!("even_filter3 {:?}", even_filter3(&mut vec2));
+    println!("even_filter3 {:?}", even_filter3(&mut vec3));
 
     let numbers = vec![1, 2, 3, 4, 5]; //vector initialize using a macro
     println!("numbers {:?}", numbers);
@@ -298,13 +325,80 @@ fn even_filter2(vec: &Vec<i32>) -> Vec<i32> {
 }
 
 fn even_filter3(vec: &mut Vec<i32>){
-    let mut new_vec: Vec<i32> = Vec::new();
     let mut i = 0;
     while i < vec.len() {
         if vec[i] % 2 != 0 {
-            new_vec.remove(i);
+            vec.remove(i);
         }else{
             i += 1;
         }
     }
+}
+
+fn hashmap_demo(){
+    let mut users : HashMap<String, u32> = HashMap::new();
+    users.insert("Anish Kumar".to_string(), 42);
+    users.insert("renu Kumar".to_string(), 43);
+
+    let first_user_age = users.get("Anish Kumar");
+
+    match first_user_age {
+        Some(val) => println!("The first user age is {}", val),
+        None => println!("No user age found"),
+    }
+}
+
+fn tuples_demo(){
+    let input_vec = vec![(String::from("anish"), 32), (String::from("renu"), 33)];
+    let hm = group_by_values(input_vec);
+    println!("hm: {:?}", hm);
+}
+
+fn group_by_values(input_vec: Vec<(String, u32)>) -> HashMap<String, u32> {
+    let mut hm = HashMap::new();
+    for (key, value) in input_vec {
+        hm.insert(key, value);
+    }
+    return hm
+}
+
+fn iterator_demo(){
+    let v1 = vec![1, 2, 3];
+    let v1_iter = v1.iter();
+    //the iter method in rust provides a way to iterate over the elements of a collection by borrowing
+    //them. v1_iter doesn't become owner of these values. We can't mutate these values as iter has immuatble
+    //reference to these values
+
+    for val in v1_iter {
+        println!("val is {}", val);
+    }
+
+    println!("{:?}", v1);
+}
+
+fn mutable_iterator_demo(){
+    let mut v1 = vec![1, 2, 3];
+    let v1_iter = v1.iter_mut();
+
+    for val in v1_iter {
+        *val += 1;
+    }
+
+    println!("{:?}", v1);
+}
+
+fn iterator_demo_using_next(){
+    let mut v1 = vec![1, 2, 3, 4];
+    let mut v1_iter = v1.iter_mut();
+
+    //for loop hides some of the complexity of using iterator.
+    while let Some(val) = v1_iter.next() {
+        println!("val is {}", val);
+    }
+}
+
+//the into iterator trait is used to convert a collection into an iterator that takes the ownership
+// of the collection
+fn into_iterator_demo(){
+
 }
