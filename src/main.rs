@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use chrono::Local;
+use std::collections::HashMap;
 use std::fs::read_to_string;
 
 fn main() {
@@ -293,7 +293,6 @@ fn vector_demo() {
     vec2.push(3);
     println!("even_filter2 {:?}", even_filter2(&vec2));
 
-
     let mut vec3 = Vec::new();
     vec3.push(1);
     vec3.push(2);
@@ -324,19 +323,19 @@ fn even_filter2(vec: &Vec<i32>) -> Vec<i32> {
     return new_vec;
 }
 
-fn even_filter3(vec: &mut Vec<i32>){
+fn even_filter3(vec: &mut Vec<i32>) {
     let mut i = 0;
     while i < vec.len() {
         if vec[i] % 2 != 0 {
             vec.remove(i);
-        }else{
+        } else {
             i += 1;
         }
     }
 }
 
-fn hashmap_demo(){
-    let mut users : HashMap<String, u32> = HashMap::new();
+fn hashmap_demo() {
+    let mut users: HashMap<String, u32> = HashMap::new();
     users.insert("Anish Kumar".to_string(), 42);
     users.insert("renu Kumar".to_string(), 43);
 
@@ -348,7 +347,7 @@ fn hashmap_demo(){
     }
 }
 
-fn tuples_demo(){
+fn tuples_demo() {
     let input_vec = vec![(String::from("anish"), 32), (String::from("renu"), 33)];
     let hm = group_by_values(input_vec);
     println!("hm: {:?}", hm);
@@ -359,10 +358,10 @@ fn group_by_values(input_vec: Vec<(String, u32)>) -> HashMap<String, u32> {
     for (key, value) in input_vec {
         hm.insert(key, value);
     }
-    return hm
+    return hm;
 }
 
-fn iterator_demo(){
+fn iterator_demo() {
     let v1 = vec![1, 2, 3];
     let v1_iter = v1.iter();
     //the iter method in rust provides a way to iterate over the elements of a collection by borrowing
@@ -376,7 +375,7 @@ fn iterator_demo(){
     println!("{:?}", v1);
 }
 
-fn mutable_iterator_demo(){
+fn mutable_iterator_demo() {
     let mut v1 = vec![1, 2, 3];
     let v1_iter = v1.iter_mut();
 
@@ -387,7 +386,7 @@ fn mutable_iterator_demo(){
     println!("{:?}", v1);
 }
 
-fn iterator_demo_using_next(){
+fn iterator_demo_using_next() {
     let mut v1 = vec![1, 2, 3, 4];
     let mut v1_iter = v1.iter_mut();
 
@@ -399,6 +398,12 @@ fn iterator_demo_using_next(){
 
 //the into iterator trait is used to convert a collection into an iterator that takes the ownership
 // of the collection
-fn into_iterator_demo(){
+fn into_iterator_demo() {
+    let v1 = vec![1, 2, 3];
+    let v1_iter = v1.into_iter();
+    for val in v1_iter {
+        println!("val is {}", val);
+    }
 
+    //println!("{:?}", v1); //ownership gets transferred in case of into_iter
 }
