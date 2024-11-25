@@ -74,6 +74,17 @@ fn main() {
     println!("");
     println!("iterator in hashmap demo");
     hashmap_iterator_demo();
+
+    //string operations
+    println!("");
+    println!("string operations demo");
+    string_operations_demo();
+
+    //slice demo
+    println!("");
+    println!("slice demo");
+    slice_demo();
+    slice_demo2();
 }
 
 fn variables_loop_function() {
@@ -438,7 +449,7 @@ fn consuming_adaptors_demo() {
     // }
 }
 
-fn iterator_adaptors_demo(){
+fn iterator_adaptors_demo() {
     let v1 = vec![1, 2, 3, 4];
     let v1_iter = v1.iter();
 
@@ -447,7 +458,6 @@ fn iterator_adaptors_demo(){
     for val in v1_iter2 {
         println!("val is {}", val);
     }
-
 
     let v2 = vec![1, 2, 3, 4];
     let v2_iter = v2.iter();
@@ -458,17 +468,16 @@ fn iterator_adaptors_demo(){
         println!("val is {}", val);
     }
 
-
     let v3 = vec![1, 2, 3, 4, 5];
     let v3_iter = v3.iter();
 
     let v3_iter2 = v3_iter.filter(|x| *x % 2 == 1).map(|x| x * 2);
 
-    let v3_new : Vec<i32> = v3_iter2.collect();
+    let v3_new: Vec<i32> = v3_iter2.collect();
     println!("v3: {:?}", v3_new);
 }
 
-fn hashmap_iterator_demo(){
+fn hashmap_iterator_demo() {
     let mut scores = HashMap::new();
     scores.insert(String::from("Blue"), 10);
     scores.insert(String::from("Yellow"), 50);
@@ -482,4 +491,42 @@ fn hashmap_iterator_demo(){
         *value += 10;
         println!("{} is scores {}", key, value);
     }
+}
+
+fn string_operations_demo() {
+    let mut name = String::from("Anish");
+    name.push_str(" Kumar");
+    println!("name is {}", name);
+
+    name.replace_range(8..name.len(), "");
+    println!("name is {}", name);
+}
+
+fn slice_demo() {
+    let mut word = String::from("hello world");
+    let word2 = &word[0..5];
+
+    //word.clear(); //cannot borrow `word` as mutable because it is also borrowed as immutable
+
+    println!("word2 is {}", word2);
+}
+
+fn slice_demo2() {
+    let word = String::from("kumar anish");
+    let word2 = find_first_word(&word);
+
+    println!("word2 is {}", word2);
+}
+
+fn find_first_word(word: &String) -> &str {
+    let mut index = 0;
+
+    for (_, i) in word.chars().enumerate() {
+        if i == ' ' {
+            break;
+        }
+        index = index + 1;
+    }
+
+    return &word[0..index];
 }

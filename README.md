@@ -64,3 +64,12 @@ the for syntax when directly applied on the collection uses into_iter under the 
 
 - Iterator adapters are methods defined on the iterator trait that don't consume the iterator, Instead they produce
   different iterators by changing some aspect of the original iterator.
+
+## Strings and slices
+
+- Strings and slices both are UTF-8 encoded.
+- Slices let you reference a contiguous sequence of elements in a collection rather than the whole collection. String
+  slices let you reference a contiguous sequence of elements in a string. So slices is a kind of generic concept, they
+  apply to vectors, strings etc. A slice is a kind of a reference so it doesn't have ownership
+
+![strings_stack_heap](./strings_stack_heap.png)
