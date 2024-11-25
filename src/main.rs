@@ -100,6 +100,16 @@ fn main() {
     println!("");
     println!("generics demo");
     generics_demo();
+
+    //traits demo
+    println!("");
+    println!("traits demo");
+    traits_demo();
+
+    //trait parameter
+    println!("");
+    println!("trait parameter demo");
+    trait_parameter_demo();
 }
 
 fn variables_loop_function() {
@@ -575,3 +585,59 @@ fn largest<T: std::cmp::PartialOrd>(a: T, b: T) -> T {
         b
     }
 }
+
+trait Summary {
+    fn summarize(&self) -> String;
+
+    //default implementation for all until overridden by local implementation
+    fn summarize2(&self) -> String{
+        format!("({}, {})", "anish", "kumar")
+    }
+}
+
+struct UserTrait {
+    name: String,
+    age: i32
+}
+
+impl Summary for UserTrait {
+    fn summarize(&self) -> String {
+        format!("User Trait: {} {}", self.name, self.age)
+    }
+}
+
+fn traits_demo(){
+    let user = UserTrait {name: String::from("Anish"), age: 25};
+    println!("user is {}", user.summarize());
+    println!("user is {}", user.summarize2());
+}
+
+struct Fix;
+impl Summary for Fix {
+    fn summarize(&self) -> String {
+        format!("{}","sdfqwerq")
+    }
+}
+
+impl Summary for String{
+    fn summarize(&self) -> String {
+        return format!("{}","sdsdf");
+    }
+}
+
+fn trait_parameter_demo(){
+    let user = UserTrait {name: String::from("Ansdfdsfdish"), age: 25};
+    notify(user);
+    notify(String::from("sdfsdf"));
+    let f = Fix;
+
+}
+
+fn notify(u: impl Summary){
+    println!("{}", u.summarize());
+}
+
+// in case if we want reference we can add &
+// fn notify(u: &impl Summary){
+//     println!("{}", u.summarize());
+// }
