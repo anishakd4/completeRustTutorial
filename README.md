@@ -42,3 +42,7 @@
 ## Iterators
 
 ![different_iterators](./different_iterators.png)
+
+the for syntax when directly applied on the collection uses into_iter under the hood.
+
+![for_loop_iter](./for_loop_iter.png)
