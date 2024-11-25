@@ -37,9 +37,18 @@
 ![ownership](./ownership.png)
 
 ## Rules of reference
+
 - At a given time you can have either one mutable reference or any number of immutable references.
 
 ## Iterators
+
+- Iterators allows you to perform some task on a sequence of items. An iterator is responsible for the logic of
+  iterating over each item and determine when the sequence is finished. In Rust Iterators are lazy they don't have any
+  effect until you call the methods that consume the iterator. `v1.iter()` has no effect until we consume it.
+
+- Under the hood for loop uses iterator. It is just that we don't see those complexities.
+
+![for_loop_iterator](./for_loop_iterator.png)
 
 ![different_iterators](./different_iterators.png)
 
@@ -48,8 +57,10 @@ the for syntax when directly applied on the collection uses into_iter under the 
 ![for_loop_iter](./for_loop_iter.png)
 
 ## consuming adapters
+
 - Methods that call next are called consuming adaptors, because calling them uses up the iterator.
 
 ## Iterator adapters
-- Iterator adapters are methods defined on the iterator trait that don't consume the iterator, Instead they produce 
-different iterators by changing some aspect of the original iterator.
+
+- Iterator adapters are methods defined on the iterator trait that don't consume the iterator, Instead they produce
+  different iterators by changing some aspect of the original iterator.
