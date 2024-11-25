@@ -409,6 +409,8 @@ fn iterator_demo_using_next() {
     while let Some(val) = v1_iter.next() {
         println!("val is {}", val);
     }
+
+    println!("{:?}", v1);
 }
 
 //the into iterator trait is used to convert a collection into an iterator that takes the ownership
