@@ -664,6 +664,8 @@ fn notify2<T: Summary + Summary2>(item: T){
     println!("{}", item.summarize());
 }
 
+
+//there is a constraint on the generic input to the function. T generic should implement the Summary trait.
 fn notify3<T: Summary>(item: T){
     println!("{}", item.summarize());
 }
