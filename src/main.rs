@@ -110,6 +110,7 @@ fn main() {
     println!("");
     println!("trait parameter demo");
     trait_parameter_demo();
+    multi_trait_parameter_demo();
 }
 
 fn variables_loop_function() {
@@ -586,6 +587,8 @@ fn largest<T: std::cmp::PartialOrd>(a: T, b: T) -> T {
     }
 }
 
+
+//impl Trait syntax works for straight forward cases but is actually syntax sugar for a longer form known as trait bound
 trait Summary {
     fn summarize(&self) -> String;
 
@@ -630,7 +633,11 @@ fn trait_parameter_demo(){
     notify(user);
     notify(String::from("sdfsdf"));
     let f = Fix;
+    notify(f);
 
+    let user2 = UserTrait {name: String::from("Ansdfdsfdish"), age: 25};
+
+    notify3(user2);
 }
 
 fn notify(u: impl Summary){
@@ -641,3 +648,22 @@ fn notify(u: impl Summary){
 // fn notify(u: &impl Summary){
 //     println!("{}", u.summarize());
 // }
+
+trait Summary2 {
+
+}
+
+fn multi_trait_parameter_demo(){
+    let user = UserTrait {name: String::from("Ansdfdsfdish"), age: 25};
+    notify2(user);
+}
+
+impl Summary2 for UserTrait {}
+
+fn notify2<T: Summary + Summary2>(item: T){
+    println!("{}", item.summarize());
+}
+
+fn notify3<T: Summary>(item: T){
+    println!("{}", item.summarize());
+}
