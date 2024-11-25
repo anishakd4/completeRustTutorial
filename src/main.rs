@@ -95,6 +95,11 @@ fn main() {
     println!("");
     println!("array slice demo");
     array_slice_demo();
+
+    //generics demo
+    println!("");
+    println!("generics demo");
+    generics_demo();
 }
 
 fn variables_loop_function() {
@@ -553,4 +558,20 @@ fn array_slice_demo(){
 
     let array_slice = &arr[0..1];
     println!("array_slice is {:?}", array_slice);
+}
+
+fn generics_demo(){
+    let bigger = largest(5, 2);
+    let biggest = largest('a', 'g');
+
+    println!("bigger is {}", bigger);
+    println!("biggest is {}", biggest);
+}
+
+fn largest<T: std::cmp::PartialOrd>(a: T, b: T) -> T {
+    if a > b {
+        a
+    } else {
+        b
+    }
 }
