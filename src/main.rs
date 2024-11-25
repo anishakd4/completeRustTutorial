@@ -85,6 +85,16 @@ fn main() {
     println!("slice demo");
     slice_demo();
     slice_demo2();
+
+    //string types
+    println!("");
+    println!("string types demo");
+    string_types();
+
+    //array slice
+    println!("");
+    println!("array slice demo");
+    array_slice_demo();
 }
 
 fn variables_loop_function() {
@@ -529,4 +539,18 @@ fn find_first_word(word: &String) -> &str {
     }
 
     return &word[0..index];
+}
+
+fn string_types() {
+    let name = String::from("Anish"); //String type
+    let name2 = &name; //has a view from original string/is a reference
+    let name3 = "manish"; //literal is also an &str but it points directly to an address in the binary.
+}
+
+fn array_slice_demo(){
+    let arr = [1, 2, 3];
+    println!("arr is {:?}", arr);
+
+    let array_slice = &arr[0..1];
+    println!("array_slice is {:?}", array_slice);
 }
