@@ -111,6 +111,12 @@ fn main() {
     println!("trait parameter demo");
     trait_parameter_demo();
     multi_trait_parameter_demo();
+
+    //lifetime demo
+    println!("");
+    println!("lifetime demo");
+    lifetime_demo();
+
 }
 
 fn variables_loop_function() {
@@ -668,4 +674,32 @@ fn notify2<T: Summary + Summary2>(item: T){
 //there is a constraint on the generic input to the function. T generic should implement the Summary trait.
 fn notify3<T: Summary>(item: T){
     println!("{}", item.summarize());
+}
+
+fn lifetime_demo(){
+    let longest_star;
+    let str1 = String::from("small");
+    let str2 = String::from("large");
+    //longest_star = longest1(&str1, &str2);
+    longest_star = longest(&str1, &str2);
+    println!("longest_star is {}", longest_star);
+}
+
+
+//missing lifetime
+// fn longest1(str1: &str, str2: &str) -> &str {
+//     if str1.len() > str2.len() {
+//         str1
+//     }else{
+//         str2
+//     }
+// }
+
+//'a is generic lifetime annotation. This describes the relationship between lifetimes of the parameters and the returned value
+fn longest<'a>(str1: &'a str, str2: &'a str) -> &'a str {
+    if str1.len() > str2.len() {
+        str1
+    }else{
+        str2
+    }
 }
