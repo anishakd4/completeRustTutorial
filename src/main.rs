@@ -1,6 +1,9 @@
 use chrono::Local;
 use std::collections::HashMap;
 use std::fs::read_to_string;
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
 
 fn main() {
     //variables loops and function
@@ -122,6 +125,24 @@ fn main() {
     println!("struct with lifetime demo");
     struct_with_lifetime_demo();
 
+    //multitreading
+    println!("");
+    println!("multithreading");
+    multithreading_demo();
+    println!("multithreading2");
+    multithreading_demo2();
+    println!("multithreading with move");
+    multithreading_with_move();
+
+    //message passing
+    println!("");
+    println!("message passing");
+    message_passing();
+
+    //multiple producers
+    println!("");
+    println!("multiple_producers");
+    multiple_producers();
 }
 
 fn variables_loop_function() {
@@ -574,7 +595,7 @@ fn string_types() {
     let name3 = "manish"; //literal is also an &str but it points directly to an address in the binary.
 }
 
-fn array_slice_demo(){
+fn array_slice_demo() {
     let arr = [1, 2, 3];
     println!("arr is {:?}", arr);
 
@@ -582,7 +603,7 @@ fn array_slice_demo(){
     println!("array_slice is {:?}", array_slice);
 }
 
-fn generics_demo(){
+fn generics_demo() {
     let bigger = largest(5, 2);
     let biggest = largest('a', 'g');
 
@@ -598,20 +619,19 @@ fn largest<T: std::cmp::PartialOrd>(a: T, b: T) -> T {
     }
 }
 
-
 //impl Trait syntax works for straight forward cases but is actually syntax sugar for a longer form known as trait bound
 trait Summary {
     fn summarize(&self) -> String;
 
     //default implementation for all until overridden by local implementation
-    fn summarize2(&self) -> String{
+    fn summarize2(&self) -> String {
         format!("({}, {})", "anish", "kumar")
     }
 }
 
 struct UserTrait {
     name: String,
-    age: i32
+    age: i32,
 }
 
 impl Summary for UserTrait {
@@ -620,8 +640,11 @@ impl Summary for UserTrait {
     }
 }
 
-fn traits_demo(){
-    let user = UserTrait {name: String::from("Anish"), age: 25};
+fn traits_demo() {
+    let user = UserTrait {
+        name: String::from("Anish"),
+        age: 25,
+    };
     println!("user is {}", user.summarize());
     println!("user is {}", user.summarize2());
 }
@@ -629,29 +652,35 @@ fn traits_demo(){
 struct Fix;
 impl Summary for Fix {
     fn summarize(&self) -> String {
-        format!("{}","sdfqwerq")
+        format!("{}", "sdfqwerq")
     }
 }
 
-impl Summary for String{
+impl Summary for String {
     fn summarize(&self) -> String {
-        return format!("{}","sdsdf");
+        return format!("{}", "sdsdf");
     }
 }
 
-fn trait_parameter_demo(){
-    let user = UserTrait {name: String::from("Ansdfdsfdish"), age: 25};
+fn trait_parameter_demo() {
+    let user = UserTrait {
+        name: String::from("Ansdfdsfdish"),
+        age: 25,
+    };
     notify(user);
     notify(String::from("sdfsdf"));
     let f = Fix;
     notify(f);
 
-    let user2 = UserTrait {name: String::from("Ansdfdsfdish"), age: 25};
+    let user2 = UserTrait {
+        name: String::from("Ansdfdsfdish"),
+        age: 25,
+    };
 
     notify3(user2);
 }
 
-fn notify(u: impl Summary){
+fn notify(u: impl Summary) {
     println!("{}", u.summarize());
 }
 
@@ -660,28 +689,28 @@ fn notify(u: impl Summary){
 //     println!("{}", u.summarize());
 // }
 
-trait Summary2 {
+trait Summary2 {}
 
-}
-
-fn multi_trait_parameter_demo(){
-    let user = UserTrait {name: String::from("Ansdfdsfdish"), age: 25};
+fn multi_trait_parameter_demo() {
+    let user = UserTrait {
+        name: String::from("Ansdfdsfdish"),
+        age: 25,
+    };
     notify2(user);
 }
 
 impl Summary2 for UserTrait {}
 
-fn notify2<T: Summary + Summary2>(item: T){
+fn notify2<T: Summary + Summary2>(item: T) {
     println!("{}", item.summarize());
 }
-
 
 //there is a constraint on the generic input to the function. T generic should implement the Summary trait.
-fn notify3<T: Summary>(item: T){
+fn notify3<T: Summary>(item: T) {
     println!("{}", item.summarize());
 }
 
-fn lifetime_demo(){
+fn lifetime_demo() {
     let longest_star;
     let str1 = String::from("small");
     let str2 = String::from("large");
@@ -689,7 +718,6 @@ fn lifetime_demo(){
     longest_star = longest(&str1, &str2);
     println!("longest_star is {}", longest_star);
 }
-
 
 //missing lifetime
 // fn longest1(str1: &str, str2: &str) -> &str {
@@ -704,7 +732,7 @@ fn lifetime_demo(){
 fn longest<'a>(str1: &'a str, str2: &'a str) -> &'a str {
     if str1.len() > str2.len() {
         str1
-    }else{
+    } else {
         str2
     }
 }
@@ -714,11 +742,92 @@ struct Userlifetime<'a> {
     name: &'a str, //^ expected named lifetime parameter
 }
 
-fn struct_with_lifetime_demo(){
+fn struct_with_lifetime_demo() {
     let name = String::from("Ansdfdsf");
-    let user = Userlifetime{
-        name: &name,
-    };
+    let user = Userlifetime { name: &name };
 
     println!("{:?}", user);
+}
+
+fn multithreading_demo() {
+    thread::spawn(|| {
+        for i in 1..10 {
+            println!("spawn thread: {}", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    for i in 1..5 {
+        println!("main thread: {}", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+}
+
+fn multithreading_demo2() {
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("new thread: {}", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    handle.join().unwrap();
+
+    for i in 1..5 {
+        println!("new main thread: {}", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+}
+
+fn multithreading_with_move() {
+    let vec = vec![1, 2, 3];
+
+    // thread::spawn(|| {
+    //     println!("{:?}", vec); //closure may outlive the current function
+    // });
+
+    let handle = thread::spawn(move || {
+        println!("{:?}", vec);
+    });
+
+    handle.join().unwrap();
+
+    //println!("{:?}", vec); //value borrowed here after move
+}
+
+fn message_passing() {
+    let (tx, rx) = mpsc::channel();
+    thread::spawn(move || {
+        tx.send(String::from("Hello, World!")).unwrap(); // tx.send returns Result. Sometimes it can return err. if we directly use unwrap we are assuming the it will
+        //always return Ok(msg), But in case of err it will panic the thread. So it is preferred not to use unwrap but a match should be used.
+    });
+
+    let received = rx.recv();
+    match received {
+        Ok(msg) => println!("{}", msg),
+        Err(err) => println!("{}", err),
+    }
+}
+
+fn multiple_producers(){
+    let (tx, rx) = mpsc::channel();
+
+    for i in 0..10 {
+        let producer = tx.clone();
+        thread::spawn(move || {
+            let mut sum: u64 = 0;
+            for j in i * 10000000..(i + 1 * 10000000) - 1 {
+                sum = sum + j;
+            }
+            producer.send(sum).unwrap();
+        });
+    }
+    drop(tx);
+
+    let mut final_sum: u64 = 0;
+    for val in rx {
+        println!("recv value from thread");
+        final_sum = final_sum + val;
+    }
+    println!("{}", final_sum);
 }
