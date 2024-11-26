@@ -73,3 +73,6 @@ the for syntax when directly applied on the collection uses into_iter under the 
   apply to vectors, strings etc. A slice is a kind of a reference so it doesn't have ownership
 
 ![strings_stack_heap](./strings_stack_heap.png)
+
+## Macros
+- println! , vec! all are macros. These get expanded to bigger code.
